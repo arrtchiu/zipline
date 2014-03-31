@@ -35,21 +35,9 @@ module Zipline
     end
 
     def write_file(zip, file, name)
-      size = get_size(file)
-
-      zip.put_next_entry name, size
+      zip.put_next_entry name, file.size
 
       file.read(2048) { |b| zip << b }
-    end
-
-    def get_size(file)
-      if is_io?(file)
-        file.size
-      elsif file.class.to_s == 'Fog::Storage::AWS::FILE'
-        file.content_length
-      else
-        throw 'cannot determine file size'
-      end
     end
   end
 end
