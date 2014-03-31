@@ -37,7 +37,9 @@ module Zipline
     def write_file(zip, file, name)
       zip.put_next_entry name, file.size
 
-      file.read(2048) { |b| zip << b }
+      while (buffer = file.read(2048))
+        zip << buffer
+      end
     end
   end
 end
