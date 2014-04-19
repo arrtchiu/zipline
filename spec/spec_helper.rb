@@ -1,8 +1,8 @@
 require 'rspec'
-require 'zipline'
 require 'paperclip'
 require 'fog'
 require 'carrierwave'
+require 'zipline'
 
 Dir["#{File.expand_path('..', __FILE__)}/support/**/*.rb"].each { |f| require f }
 

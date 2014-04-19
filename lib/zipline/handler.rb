@@ -1,4 +1,3 @@
-require 'zipline/handler/paperclip'
 require 'zipline/handler/basic_i_o'
 
 module Zipline
@@ -15,10 +14,21 @@ module Zipline
     end
 
     def handlers
-      [
-        Paperclip,
-        BasicIO
-      ]
+      @handlers ||= [BasicIO]
     end
+
+    private
+
+    def self.load_handler(handler)
+      require('zipline/handler/' + handler)
+      handlers.unshift handler_class(handler)
+    end
+
+    def self.handler_class(handler)
+      const_get handler.dup.split(/_/).map { |word| word.capitalize }.join('')
+    end
+
+    defined?(::Paperclip) && self.load_handler('paperclip')
+    defined?(::CarrierWave) && self.load_handler('carrier_wave')
   end
 end

@@ -21,6 +21,7 @@ describe Zipline::ZipGenerator do
   let(:directory){ storage.directories.create(directory_attributes) }
   let(:file){ directory.files.create(file_attributes) }
 
+  # TODO: stub `Zipline::Handler.handle!` and test the rest of the behaviour
   describe '.normalize' do
     let(:generator){ Zipline::ZipGenerator.new([])}
     context "CarrierWave" do

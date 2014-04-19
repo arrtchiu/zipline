@@ -4,6 +4,8 @@ describe Zipline::Handler do
   describe '::handler_for' do
     subject { described_class.handler_for(obj) }
 
+    # TODO: replace this with more generic testing, this is basically test duplication
+
     context 'paperclip attachment' do
       let(:obj) { Paperclip::Attachment.new(:name, :instance) }
       it { should be Zipline::Handler::Paperclip }
@@ -12,6 +14,11 @@ describe Zipline::Handler do
     context 'StringIO' do
       let(:obj) { StringIO.new('blah') }
       it { should be Zipline::Handler::BasicIO }
+    end
+
+    context 'carrierwave' do
+      let(:obj) { CarrierWave::SanitizedFile.new(Tempfile.new('t')) }
+      it { should be Zipline::Handler::CarrierWave }
     end
   end
 
