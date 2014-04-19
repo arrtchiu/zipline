@@ -1,11 +1,11 @@
-require "zipline/version"
-
+require 'stringio'
 require 'zip'
 require 'curb'
-
-require "zipline/fake_stream"
-require "zipline/output_stream"
-require "zipline/zip_generator"
+require 'zipline/version'
+require 'zipline/fake_stream'
+require 'zipline/output_stream'
+require 'zipline/zip_generator'
+require 'zipline/handler'
 
 # class MyController < ApplicationController
 #   include Zipline

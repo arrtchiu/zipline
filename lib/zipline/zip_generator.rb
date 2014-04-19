@@ -20,24 +20,25 @@ module Zipline
     end
 
     def handle_file(zip, file, name)
-      file = normalize(file)
+      file = Zipline::Handler.handle!(file)
       name = uniquify_name(name)
       write_file(zip, file, name)
     end
 
     def normalize(file)
-      unless is_io?(file)
-        if file.respond_to?(:url) && (!defined?(::Paperclip::Attachment) || !file.is_a?(::Paperclip::Attachment))
-          file = file
-        elsif file.respond_to? :file
-          file = File.open(file.file)
-        elsif file.respond_to? :path
-          file = File.open(file.path)
-        else
-          raise(ArgumentError, 'Bad File/Stream')
-        end
-      end
-      file
+      Zipline::Handler.handle!(file)
+      # unless is_io?(file)
+      #   if file.respond_to?(:url) && (!defined?(::Paperclip::Attachment) || !file.is_a?(::Paperclip::Attachment))
+      #     file = file
+      #   elsif file.respond_to? :file
+      #     file = File.open(file.file)
+      #   elsif file.respond_to? :path
+      #     file = File.open(file.path)
+      #   else
+      #     raise(ArgumentError, 'Bad File/Stream')
+      #   end
+      # end
+      # file
     end
 
     def new_output(&block)
