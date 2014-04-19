@@ -18,4 +18,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'rubyzip', ['>= 1.0', '<= 1.1.2']
   gem.add_dependency 'rails', '>= 3.2.1'
   gem.add_dependency 'curb'
+  gem.add_dependency 'fog'
+  gem.add_dependency 'carrierwave'
+  gem.add_dependency 'paperclip'
+  gem.add_development_dependency 'rspec', '~> 3.0.0.beta'
 end
